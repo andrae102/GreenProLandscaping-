@@ -1,395 +1,756 @@
-// ================================
-// Mobile Menu Toggle
-// ================================
-const mobileMenuToggle = document.querySelector(’.mobile-menu-toggle’);
-const navMenu = document.querySelector(’.nav-menu’);
-
-if (mobileMenuToggle) {
-mobileMenuToggle.addEventListener(‘click’, () => {
-navMenu.classList.toggle(‘active’);
-mobileMenuToggle.classList.toggle(‘active’);
-});
-}
-
-// ================================
-// Smooth Scrolling for Navigation Links
-// ================================
-document.querySelectorAll(‘a[href^=”#”]’).forEach(anchor => {
-anchor.addEventListener(‘click’, function (e) {
-const href = this.getAttribute(‘href’);
-if (href !== ‘#’) {
-e.preventDefault();
-const target = document.querySelector(href);
-if (target) {
-target.scrollIntoView({
-behavior: ‘smooth’,
-block: ‘start’
-});
-// Close mobile menu if open
-if (navMenu.classList.contains(‘active’)) {
-navMenu.classList.remove(‘active’);
-mobileMenuToggle.classList.remove(‘active’);
-}
-}
-}
-});
-});
-
-// ================================
-// Navbar Background on Scroll
-// ================================
-const navbar = document.querySelector(’.navbar’);
-let lastScroll = 0;
-
-window.addEventListener(‘scroll’, () => {
-const currentScroll = window.pageYOffset;
+/* ================================
+GREENPRO LANDSCAPING - VIBRANT GREEN THEME
+================================ */
+:root {
+/* Primary Colors - Nature Green */
+–green-primary: #22C55E;
+–green-dark: #16A34A;
+–green-light: #86EFAC;
 
 ```
-if (currentScroll > 100) {
-    navbar.style.background = 'rgba(10, 14, 26, 0.98)';
-    navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-} else {
-    navbar.style.background = 'rgba(10, 14, 26, 0.95)';
-    navbar.style.boxShadow = 'none';
-}
+/* Accent Colors */
+--orange-primary: #FB923C;
+--orange-dark: #F97316;
+--yellow-primary: #FBBF24;
 
-lastScroll = currentScroll;
-```
+/* Base Colors */
+--black: #0A0A0A;
+--charcoal: #1F1F1F;
+--gray-dark: #374151;
+--gray: #6B7280;
+--gray-light: #D1D5DB;
+--gray-lighter: #F3F4F6;
+--white: #FFFFFF;
 
-});
+/* Gradients */
+--gradient-green: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+--gradient-orange: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+--gradient-hero: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 50%, #FFF7ED 100%);
 
-// ================================
-// Vehicle Key Finder - Cascading Dropdowns
-// ================================
-const vehicleData = {
-toyota: [‘Camry’, ‘Corolla’, ‘RAV4’, ‘Highlander’, ‘Tacoma’, ‘Tundra’, ‘4Runner’, ‘Sienna’],
-honda: [‘Accord’, ‘Civic’, ‘CR-V’, ‘Pilot’, ‘Odyssey’, ‘Ridgeline’, ‘HR-V’, ‘Passport’],
-ford: [‘F-150’, ‘Mustang’, ‘Explorer’, ‘Escape’, ‘Edge’, ‘Ranger’, ‘Expedition’, ‘Bronco’],
-chevrolet: [‘Silverado’, ‘Equinox’, ‘Traverse’, ‘Tahoe’, ‘Malibu’, ‘Colorado’, ‘Suburban’, ‘Blazer’],
-nissan: [‘Altima’, ‘Sentra’, ‘Rogue’, ‘Pathfinder’, ‘Frontier’, ‘Titan’, ‘Murano’, ‘Armada’],
-bmw: [‘3 Series’, ‘5 Series’, ‘X3’, ‘X5’, ‘X1’, ‘X7’, ‘7 Series’, ‘4 Series’],
-mercedes: [‘C-Class’, ‘E-Class’, ‘GLE’, ‘GLC’, ‘S-Class’, ‘GLA’, ‘GLS’, ‘A-Class’]
-};
+/* Typography */
+--font-display: 'Poppins', sans-serif;
+--font-body: 'Inter', sans-serif;
 
-const yearSelect = document.getElementById(‘year’);
-const makeSelect = document.getElementById(‘make’);
-const modelSelect = document.getElementById(‘model’);
-const findButton = document.querySelector(’.btn-find’);
-
-if (makeSelect && modelSelect) {
-makeSelect.addEventListener(‘change’, function() {
-const selectedMake = this.value;
-modelSelect.innerHTML = ‘<option value="">Select Model</option>’;
-
-```
-    if (selectedMake && vehicleData[selectedMake]) {
-        vehicleData[selectedMake].forEach(model => {
-            const option = document.createElement('option');
-            option.value = model.toLowerCase().replace(/\s+/g, '-');
-            option.textContent = model;
-            modelSelect.appendChild(option);
-        });
-        modelSelect.disabled = false;
-    } else {
-        modelSelect.disabled = true;
-    }
-});
+/* Shadows */
+--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+--shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.18);
+--shadow-green: 0 12px 36px rgba(34, 197, 94, 0.4);
+--shadow-orange: 0 12px 36px rgba(251, 146, 60, 0.4);
 ```
 
 }
 
-if (findButton) {
-findButton.addEventListener(‘click’, function(e) {
-e.preventDefault();
+- {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
-```
-    const year = yearSelect.value;
-    const make = makeSelect.options[makeSelect.selectedIndex].text;
-    const model = modelSelect.options[modelSelect.selectedIndex].text;
-    
-    if (!year || !makeSelect.value || !modelSelect.value) {
-        alert('Please select year, make, and model to find your key.');
-        return;
-    }
-    
-    // Create WhatsApp message with vehicle details
-    const vehicle = `${year} ${make} ${model}`;
-    const whatsappMessage = `Hi Brown Keys Auto! I need a key for my ${vehicle}. Can you help me with pricing and availability?`;
-    const whatsappUrl = `https://wa.me/16582183855?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    // Show options to user
-    const userChoice = confirm(`Found keys for your ${vehicle}!\n\nClick OK to book via WhatsApp, or Cancel to view pricing on this page.`);
-    
-    if (userChoice) {
-        // Open WhatsApp
-        window.open(whatsappUrl, '_blank');
-    } else {
-        // Show pricing info (in real site, would show actual pricing)
-        alert(`Keys available for ${vehicle}:\n\n• Standard Key: $15-$25\n• Transponder Key: $45-$85\n• Smart Key: $89-$149\n\nContact us to confirm availability and book your service!`);
-    }
-});
-```
-
+html {
+scroll-behavior: smooth;
 }
 
-// ================================
-// Contact Form Validation & Submission
-// ================================
-const contactForm = document.getElementById(‘contactForm’);
-
-if (contactForm) {
-contactForm.addEventListener(‘submit’, function(e) {
-e.preventDefault();
-
-```
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const vehicle = document.getElementById('vehicle').value.trim();
-    const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value.trim();
-    
-    // Basic validation
-    if (!name || !phone || !email) {
-        alert('Please fill in all required fields (Name, Phone, Email).');
-        return;
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    
-    // Phone validation (basic)
-    const phoneRegex = /^[\d\s\-\(\)]+$/;
-    if (!phoneRegex.test(phone)) {
-        alert('Please enter a valid phone number.');
-        return;
-    }
-    
-    // Create WhatsApp message with form details
-    let whatsappMessage = `Hi Brown Keys Auto! My name is ${name}.\n\n`;
-    if (vehicle) whatsappMessage += `Vehicle: ${vehicle}\n`;
-    if (service) {
-        const serviceText = document.querySelector(`#service option[value="${service}"]`).textContent;
-        whatsappMessage += `Service Needed: ${serviceText}\n`;
-    }
-    if (message) whatsappMessage += `Details: ${message}\n`;
-    whatsappMessage += `\nContact: ${phone}\nEmail: ${email}`;
-    
-    const whatsappUrl = `https://wa.me/16582183855?text=${encodeURIComponent(whatsappMessage)}`;
-    
-    // Ask user if they want to continue via WhatsApp
-    const useWhatsApp = confirm(`Thank you, ${name}! Your quote request is ready.\n\nWould you like to send this via WhatsApp for faster response?\n\nClick OK to open WhatsApp, or Cancel to submit via email.`);
-    
-    if (useWhatsApp) {
-        window.open(whatsappUrl, '_blank');
-    } else {
-        // Success message (in real implementation, would send to server)
-        alert(`Thank you, ${name}! Your quote request has been received.\n\nWe'll contact you shortly at ${phone} to discuss your key needs.`);
-    }
-    
-    // Reset form
-    contactForm.reset();
-});
-```
-
+body {
+font-family: var(–font-body);
+background: var(–white);
+color: var(–black);
+line-height: 1.6;
+overflow-x: hidden;
 }
 
-// ================================
-// Scroll Animations - Fade in elements
-// ================================
-const observerOptions = {
-threshold: 0.1,
-rootMargin: ‘0px 0px -100px 0px’
-};
-
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.style.opacity = ‘1’;
-entry.target.style.transform = ‘translateY(0)’;
-}
-});
-}, observerOptions);
-
-// Observe all service cards, pricing cards, feature items
-const animateOnScroll = document.querySelectorAll(’.service-card, .comparison-card, .feature-item, .visual-card, .contact-item’);
-
-animateOnScroll.forEach(element => {
-element.style.opacity = ‘0’;
-element.style.transform = ‘translateY(30px)’;
-element.style.transition = ‘opacity 0.6s ease, transform 0.6s ease’;
-observer.observe(element);
-});
-
-// ================================
-// Parallax Effect for Hero Background
-// ================================
-window.addEventListener(‘scroll’, () => {
-const scrolled = window.pageYOffset;
-const heroBackground = document.querySelector(’.hero-background’);
-
-```
-if (heroBackground && scrolled < window.innerHeight) {
-    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-}
-```
-
-});
-
-// ================================
-// Floating Cards Animation Enhancement
-// ================================
-const floatingCards = document.querySelectorAll(’.floating-card’);
-
-floatingCards.forEach((card, index) => {
-card.addEventListener(‘mouseenter’, function() {
-this.style.transform = `translateY(-10px) scale(1.05)`;
-this.style.zIndex = ‘10’;
-});
-
-```
-card.addEventListener('mouseleave', function() {
-    this.style.transform = '';
-    this.style.zIndex = '';
-});
-```
-
-});
-
-// ================================
-// Service Card Interactive Effects
-// ================================
-const serviceCards = document.querySelectorAll(’.service-card’);
-
-serviceCards.forEach(card => {
-card.addEventListener(‘mouseenter’, function() {
-// Add a subtle glow effect
-this.style.boxShadow = ‘0 0 40px rgba(212, 175, 55, 0.4)’;
-});
-
-```
-card.addEventListener('mouseleave', function() {
-    if (!this.classList.contains('featured')) {
-        this.style.boxShadow = '';
-    }
-});
-```
-
-});
-
-// ================================
-// Logo Item Interaction
-// ================================
-const logoItems = document.querySelectorAll(’.logo-item’);
-
-logoItems.forEach(logo => {
-logo.addEventListener(‘click’, function() {
-const brand = this.textContent.trim();
-alert(`Viewing keys for ${brand}...\n\nIn a live site, this would filter keys by this brand.`);
-});
-});
-
-// ================================
-// Pricing Comparison Interactive Highlight
-// ================================
-const comparisonCards = document.querySelectorAll(’.comparison-card’);
-
-comparisonCards.forEach(card => {
-card.addEventListener(‘click’, function() {
-if (!this.classList.contains(‘featured’)) {
-comparisonCards.forEach(c => c.classList.remove(‘active-comparison’));
-this.classList.add(‘active-comparison’);
-}
-});
-});
-
-// ================================
-// Dynamic Year Population (extend range)
-// ================================
-if (yearSelect) {
-const currentYear = new Date().getFullYear();
-yearSelect.innerHTML = ‘<option value="">Select Year</option>’;
-
-```
-// Add years from current year down to 15 years back
-for (let year = currentYear; year >= currentYear - 15; year--) {
-    const option = document.createElement('option');
-    option.value = year;
-    option.textContent = year;
-    yearSelect.appendChild(option);
-}
-```
-
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 24px;
 }
 
-// ================================
-// Stats Counter Animation
-// ================================
-function animateCounter(element, target, duration = 2000) {
-const start = 0;
-const increment = target / (duration / 16); // 60fps
-let current = start;
-
-```
-const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-        element.textContent = target;
-        clearInterval(timer);
-    } else {
-        element.textContent = Math.floor(current);
-    }
-}, 16);
-```
-
+/* ================================
+Navigation - Bold & Modern
+================================ */
+.navbar {
+background: var(–white);
+box-shadow: 0 4px 24px rgba(34, 197, 94, 0.15);
+padding: 22px 0;
+position: sticky;
+top: 0;
+z-index: 999;
+border-bottom: 4px solid var(–green-primary);
 }
 
-// Observe stats and animate when visible
-const statsObserver = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting && !entry.target.dataset.animated) {
-const targetText = entry.target.textContent.trim();
+.navbar .container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 
-```
-        // Extract number from text like "75%" or "15K+"
-        let targetNumber = parseInt(targetText.replace(/[^\d]/g, ''));
-        
-        if (targetText.includes('K+')) {
-            targetNumber = targetNumber;
-            animateCounter(entry.target, targetNumber, 2000);
-            entry.target.dataset.animated = 'true';
-            
-            // Re-add suffix after animation
-            setTimeout(() => {
-                entry.target.textContent = targetNumber + 'K+';
-            }, 2000);
-        } else if (targetText.includes('%')) {
-            animateCounter(entry.target, targetNumber, 2000);
-            entry.target.dataset.animated = 'true';
-            
-            // Re-add suffix after animation
-            setTimeout(() => {
-                entry.target.textContent = targetNumber + '%';
-            }, 2000);
-        }
-    }
-});
-```
+.navbar-brand {
+display: flex;
+align-items: center;
+gap: 18px;
+text-decoration: none;
+}
 
-}, { threshold: 0.5 });
+.brand-icon {
+width: 50px;
+height: 50px;
+background: var(–gradient-green);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 28px;
+box-shadow: var(–shadow-green);
+}
 
-document.querySelectorAll(’.stat-number, .stat-big’).forEach(stat => {
-statsObserver.observe(stat);
-});
+.navbar-brand span {
+font-family: var(–font-display);
+font-size: 28px;
+font-weight: 900;
+background: var(–gradient-green);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+letter-spacing: -0.5px;
+}
 
-// ================================
-// Console Welcome Message
-// ================================
-console.log(’%c🔑 Brown Keys Auto’, ‘color: #D4AF37; font-size: 24px; font-weight: bold;’);
-console.log(’%cProfessional Key Cutting & Programming Services’, ‘color: #B8BFD8; font-size: 14px;’);
-console.log(’%cWebsite loaded successfully ✓’, ‘color: #22C55E; font-size: 12px;’);
-console.log(’%cBook via WhatsApp: +1 (658) 218-3855’, ‘color: #25D366; font-size: 12px;’);
+.nav-menu {
+display: flex;
+gap: 45px;
+list-style: none;
+align-items: center;
+}
+
+.nav-link {
+color: var(–black);
+text-decoration: none;
+font-weight: 700;
+font-size: 17px;
+transition: all 0.3s;
+position: relative;
+}
+
+.nav-link::after {
+content: ‘’;
+position: absolute;
+bottom: -8px;
+left: 0;
+width: 0;
+height: 4px;
+background: var(–gradient-green);
+border-radius: 2px;
+transition: width 0.3s;
+}
+
+.nav-link:hover {
+color: var(–green-primary);
+}
+
+.nav-link:hover::after {
+width: 100%;
+}
+
+/* ================================
+Button System - Bold CTAs
+================================ */
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+padding: 18px 36px;
+border-radius: 14px;
+font-weight: 800;
+text-decoration: none;
+transition: all 0.3s ease;
+cursor: pointer;
+border: none;
+font-family: var(–font-body);
+font-size: 18px;
+position: relative;
+overflow: hidden;
+}
+
+.btn::before {
+content: ‘’;
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.3);
+transform: translate(-50%, -50%);
+transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+width: 400px;
+height: 400px;
+}
+
+.btn-primary {
+background: var(–gradient-green);
+color: var(–white);
+box-shadow: var(–shadow-green);
+}
+
+.btn-primary:hover {
+transform: translateY(-3px);
+box-shadow: 0 16px 48px rgba(34, 197, 94, 0.5);
+}
+
+.btn-outline {
+background: var(–white);
+color: var(–green-primary);
+border: 3px solid var(–green-primary);
+}
+
+.btn-outline:hover {
+background: var(–green-primary);
+color: var(–white);
+}
+
+.btn-lg {
+padding: 22px 44px;
+font-size: 20px;
+}
+
+.btn-light {
+background: var(–white);
+color: var(–green-primary);
+}
+
+.btn-light:hover {
+background: var(–gray-lighter);
+}
+
+/* ================================
+Hero - BOLD & ATTENTION-GRABBING
+================================ */
+.hero {
+background: var(–gradient-hero);
+padding: 140px 0 120px;
+position: relative;
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘🌿’;
+position: absolute;
+top: 10%;
+right: 10%;
+font-size: 200px;
+opacity: 0.08;
+animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+content: ‘🍃’;
+position: absolute;
+bottom: 10%;
+left: 10%;
+font-size: 180px;
+opacity: 0.08;
+animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-30px) rotate(15deg); }
+}
+
+.hero-content {
+max-width: 900px;
+position: relative;
+z-index: 1;
+}
+
+.hero-badge {
+display: inline-flex;
+align-items: center;
+gap: 12px;
+padding: 14px 28px;
+background: var(–white);
+border-radius: 100px;
+font-weight: 900;
+color: var(–black);
+margin-bottom: 40px;
+box-shadow: var(–shadow-lg);
+border: 3px solid var(–green-primary);
+animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
+}
+
+.badge-dot {
+width: 12px;
+height: 12px;
+background: var(–green-primary);
+border-radius: 50%;
+animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero h1 {
+font-family: var(–font-display);
+font-size: 80px;
+font-weight: 900;
+line-height: 1.05;
+margin-bottom: 35px;
+color: var(–black);
+letter-spacing: -2px;
+}
+
+.gradient-text {
+background: var(–gradient-green);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: inline-block;
+}
+
+.lead {
+font-size: 24px;
+color: var(–gray-dark);
+margin-bottom: 50px;
+line-height: 1.7;
+font-weight: 500;
+}
+
+/* ================================
+Stats Bar - HIGH IMPACT
+================================ */
+.stats {
+background: var(–black);
+padding: 80px 0;
+position: relative;
+overflow: hidden;
+}
+
+.stats::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: repeating-linear-gradient(
+90deg,
+transparent,
+transparent 50px,
+rgba(34, 197, 94, 0.05) 50px,
+rgba(34, 197, 94, 0.05) 100px
+);
+}
+
+.stats .container {
+position: relative;
+z-index: 1;
+}
+
+.stat-box {
+text-align: center;
+color: var(–white);
+padding: 30px;
+border-radius: 20px;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 2px solid rgba(34, 197, 94, 0.3);
+transition: all 0.4s;
+}
+
+.stat-box:hover {
+transform: translateY(-10px);
+background: rgba(255, 255, 255, 0.08);
+border-color: var(–green-primary);
+box-shadow: var(–shadow-green);
+}
+
+.stat-number {
+font-family: var(–font-display);
+font-size: 64px;
+font-weight: 900;
+background: linear-gradient(135deg, var(–orange-primary), var(–green-primary), var(–yellow-primary));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+margin-bottom: 14px;
+line-height: 1;
+}
+
+.stat-label {
+font-size: 18px;
+color: var(–gray-light);
+font-weight: 700;
+}
+
+/* ================================
+Image Showcase
+================================ */
+.image-showcase {
+padding: 100px 0;
+background: var(–gray-lighter);
+}
+
+.showcase-img {
+height: 400px;
+border-radius: 24px;
+overflow: hidden;
+position: relative;
+transition: all 0.4s;
+display: flex;
+align-items: flex-end;
+padding: 40px;
+background-size: cover;
+background-position: center;
+}
+
+.showcase-img::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+z-index: 1;
+}
+
+.showcase-img:hover {
+transform: translateY(-12px);
+box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.showcase-overlay {
+position: relative;
+z-index: 2;
+color: white;
+}
+
+.showcase-overlay h4 {
+font-weight: 900;
+font-size: 28px;
+margin-bottom: 10px;
+}
+
+.showcase-overlay p {
+font-size: 18px;
+opacity: 0.95;
+}
+
+/* ================================
+Services Section
+================================ */
+.services {
+padding: 120px 0;
+background: var(–white);
+}
+
+.section-title {
+font-family: var(–font-display);
+font-size: 60px;
+font-weight: 900;
+color: var(–black);
+margin-bottom: 20px;
+letter-spacing: -1px;
+text-align: center;
+}
+
+.section-subtitle {
+font-size: 24px;
+color: var(–gray);
+font-weight: 600;
+text-align: center;
+margin-bottom: 80px;
+}
+
+.service-card {
+background: var(–gray-lighter);
+padding: 50px 40px;
+border-radius: 28px;
+text-align: center;
+border: 4px solid transparent;
+transition: all 0.4s ease;
+height: 100%;
+}
+
+.service-card:hover {
+border-color: var(–green-primary);
+transform: translateY(-12px);
+box-shadow: var(–shadow-lg);
+background: var(–white);
+}
+
+.service-icon {
+font-size: 80px;
+margin-bottom: 28px;
+display: inline-block;
+animation: float 3s ease-in-out infinite;
+}
+
+.service-card h4 {
+font-family: var(–font-display);
+font-size: 26px;
+font-weight: 900;
+margin-bottom: 20px;
+color: var(–black);
+}
+
+.service-card p {
+color: var(–gray-dark);
+font-size: 17px;
+font-weight: 500;
+line-height: 1.7;
+}
+
+/* ================================
+Gallery Section
+================================ */
+.gallery {
+padding: 120px 0;
+background: var(–gray-lighter);
+}
+
+.gallery-item {
+border-radius: 24px;
+overflow: hidden;
+box-shadow: var(–shadow-md);
+transition: all 0.4s;
+height: 400px;
+display: flex;
+align-items: center;
+justify-content: center;
+background-size: cover;
+background-position: center;
+position: relative;
+}
+
+.gallery-item::before {
+content: ‘’;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0,0,0,0.35);
+transition: all 0.4s;
+}
+
+.gallery-item:hover::before {
+background: rgba(0,0,0,0.15);
+}
+
+.gallery-item:hover {
+transform: scale(1.05);
+box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-content {
+position: relative;
+z-index: 2;
+color: white;
+text-align: center;
+}
+
+.gallery-content h5 {
+font-family: var(–font-display);
+font-weight: 900;
+font-size: 24px;
+}
+
+/* ================================
+CTA Section
+================================ */
+.cta-section {
+padding: 120px 0;
+background: var(–gradient-green);
+color: white;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.cta-section::before {
+content: ‘’;
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.cta-section h2 {
+font-family: var(–font-display);
+font-size: 68px;
+font-weight: 900;
+margin-bottom: 28px;
+position: relative;
+z-index: 1;
+letter-spacing: -1px;
+}
+
+.cta-section p {
+font-size: 26px;
+margin-bottom: 55px;
+font-weight: 600;
+position: relative;
+z-index: 1;
+}
+
+/* ================================
+Contact Section
+================================ */
+.contact {
+padding: 120px 0;
+background: var(–white);
+}
+
+.contact-card {
+background: var(–gray-lighter);
+padding: 50px 40px;
+border-radius: 24px;
+text-align: center;
+transition: all 0.4s;
+border: 3px solid transparent;
+}
+
+.contact-card:hover {
+background: var(–white);
+box-shadow: var(–shadow-lg);
+border-color: var(–green-primary);
+transform: translateY(-8px);
+}
+
+.contact-icon {
+width: 80px;
+height: 80px;
+background: var(–gradient-green);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 36px;
+margin: 0 auto 25px;
+color: white;
+box-shadow: var(–shadow-green);
+}
+
+.contact-card h5 {
+font-weight: 900;
+font-size: 22px;
+margin-bottom: 15px;
+}
+
+.contact-card p {
+color: var(–gray);
+margin-bottom: 8px;
+font-size: 16px;
+}
+
+.contact-card a {
+color: var(–green-primary);
+text-decoration: none;
+font-weight: 800;
+font-size: 18px;
+}
+
+.contact-card a:hover {
+color: var(–green-dark);
+}
+
+/* ================================
+Footer - PROFESSIONAL
+================================ */
+.footer {
+background: var(–black);
+padding: 80px 0 40px;
+color: var(–white);
+}
+
+.footer h5 {
+font-weight: 900;
+font-size: 24px;
+margin-bottom: 24px;
+background: var(–gradient-green);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.footer p,
+.footer a {
+color: var(–gray-light);
+}
+
+.footer a {
+text-decoration: none;
+transition: color 0.3s;
+font-weight: 600;
+}
+
+.footer a:hover {
+color: var(–green-primary);
+}
+
+/* ================================
+WhatsApp Float - PROMINENT
+================================ */
+.whatsapp-float {
+position: fixed;
+bottom: 40px;
+right: 40px;
+background: #25D366;
+color: var(–white);
+width: 70px;
+height: 70px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 12px 40px rgba(37, 211, 102, 0.5);
+z-index: 9999;
+transition: all 0.3s ease;
+text-decoration: none;
+font-size: 36px;
+border: 4px solid var(–white);
+}
+
+.whatsapp-float:hover {
+transform: scale(1.15);
+box-shadow: 0 20px 60px rgba(37, 211, 102, 0.6);
+}
+
+/* ================================
+Responsive
+================================ */
+@media (max-width: 1024px) {
+.hero h1 { font-size: 60px; }
+.section-title { font-size: 48px; }
+}
+
+@media (max-width: 768px) {
+.nav-menu { display: none; }
+.hero { padding: 90px 0 70px; }
+.hero h1 { font-size: 44px; }
+.lead { font-size: 20px; }
+.btn { width: 100%; }
+.showcase-img { height: 280px; }
+.gallery-item { height: 300px; }
+.cta-section h2 { font-size: 42px; }
+.whatsapp-float { bottom: 24px; right: 24px; width: 60px; height: 60px; font-size: 30px; }
+}
