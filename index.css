@@ -1,0 +1,521 @@
+/* GreenPro Landscaping - Global Styles */
+
+:root {
+  --primary-green: #22c55e;
+  --dark-green: #16a34a;
+  --light-green: #86efac;
+  --dark: #0f172a;
+  --gray: #64748b;
+  --light: #f1f5f9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===================== NAVIGATION ===================== */
+.navbar {
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--primary-green) !important;
+}
+
+.brand-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+}
+
+.nav-link {
+  font-weight: 600;
+  color: var(--gray);
+  margin: 0 15px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--primary-green);
+}
+
+/* ===================== BUTTONS ===================== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  border: none;
+  padding: 14px 32px;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(34, 197, 94, 0.4);
+}
+
+.btn-outline {
+  background: white;
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+  padding: 14px 32px;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: var(--primary-green);
+  color: white;
+}
+
+.btn-lg {
+  padding: 18px 40px;
+  font-size: 18px;
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  padding: 140px 0 100px;
+  background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🌿';
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  font-size: 150px;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '🍃';
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  font-size: 120px;
+  opacity: 0.1;
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+.hero h1 {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 30px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--primary-green), var(--dark-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero .lead {
+  font-size: 22px;
+  color: var(--gray);
+  margin-bottom: 40px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* ===================== STATS ===================== */
+.stats {
+  padding: 80px 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 56px;
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--primary-green), var(--dark-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ===================== IMAGE SHOWCASE ===================== */
+.image-showcase {
+  padding: 80px 0;
+  background: var(--light);
+}
+
+.showcase-img {
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s;
+  display: flex;
+  align-items: flex-end;
+  padding: 30px;
+  background-size: cover;
+  background-position: center;
+}
+
+.showcase-img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+  z-index: 1;
+}
+
+.showcase-img:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.showcase-overlay {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.showcase-overlay h4 {
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.showcase-overlay p {
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* ===================== SERVICES ===================== */
+.services {
+  padding: 120px 0;
+  background: white;
+}
+
+.section-title {
+  font-size: 52px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 22px;
+  color: var(--gray);
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.service-card {
+  background: var(--light);
+  padding: 50px 40px;
+  border-radius: 20px;
+  transition: all 0.4s;
+  height: 100%;
+  border: 2px solid transparent;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+  background: white;
+  border-color: var(--primary-green);
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  margin-bottom: 25px;
+}
+
+.service-card h4 {
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: var(--gray);
+  font-size: 16px;
+}
+
+/* ===================== CTA ===================== */
+.cta-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cta-section h2 {
+  font-size: 56px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section p {
+  font-size: 22px;
+  margin-bottom: 40px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===================== GALLERY ===================== */
+.gallery {
+  padding: 120px 0;
+  background: var(--light);
+}
+
+.gallery-item {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  transition: all 0.4s;
+}
+
+.gallery-item:hover::before {
+  background: rgba(0,0,0,0.1);
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+/* ===================== CONTACT ===================== */
+.contact {
+  padding: 120px 0;
+  background: white;
+}
+
+.contact-card {
+  background: var(--light);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.contact-card:hover {
+  background: white;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 20px;
+  color: white;
+}
+
+.contact-card h5 {
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.contact-card p {
+  color: var(--gray);
+  margin-bottom: 5px;
+}
+
+.contact-card a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* ===================== FOOTER ===================== */
+.footer {
+  background: var(--dark);
+  color: white;
+  padding: 60px 0 30px;
+}
+
+.footer h5 {
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--light-green);
+}
+
+.footer p,
+.footer a {
+  color: #94a3b8;
+}
+
+.footer a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: var(--light-green);
+}
+
+/* ===================== WHATSAPP FLOAT ===================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 65px;
+  height: 65px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+  z-index: 9999;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 32px;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 42px; }
+  .hero .lead { font-size: 18px; }
+  .section-title { font-size: 36px; }
+  .cta-section h2 { font-size: 36px; }
+  .service-card { margin-bottom: 30px; }
+  .showcase-img { height: 250px; }
+}
